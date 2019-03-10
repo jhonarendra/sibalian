@@ -1,6 +1,6 @@
 /*
-SQLyog Ultimate v12.09 (64 bit)
-MySQL - 10.1.29-MariaDB : Database - topik_khusus
+SQLyog Ultimate v11.11 (64 bit)
+MySQL - 5.5.5-10.1.30-MariaDB : Database - topik_khusus
 *********************************************************************
 */
 
@@ -12,10 +12,6 @@ MySQL - 10.1.29-MariaDB : Database - topik_khusus
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`topik_khusus` /*!40100 DEFAULT CHARACTER SET latin1 */;
-
-USE `topik_khusus`;
-
 /*Table structure for table `admin` */
 
 DROP TABLE IF EXISTS `admin`;
@@ -133,9 +129,11 @@ CREATE TABLE `dokter` (
   PRIMARY KEY (`id_dokter`),
   KEY `id_kat` (`id_kat`),
   CONSTRAINT `dokter_ibfk_1` FOREIGN KEY (`id_kat`) REFERENCES `kategori_dokter` (`id_kat`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `dokter` */
+
+insert  into `dokter`(`id_dokter`,`nama_dokter`,`ttl_dokter`,`no_telp_dokter`,`alamat_dokter`,`created_at`,`updated_at`,`id_kat`) values (1,'Dr. Saya','Jimbaran, 11 Maret 1920','0839834093209','Jalan Bukit Jimbaran','2019-03-10 23:43:46','2019-03-10 23:43:49',1),(2,'Dr. Anonim','Denpasar, 1 Januari 1958','089399837889','Jalan PB Sudirman','2019-03-10 23:44:30','2019-03-10 23:44:33',2),(3,'Dr. Putu','Kuta, 1 Juli 1976','087698765432','Jalan By Pass Ngurah Rai','2019-03-10 23:45:11','2019-03-10 23:45:13',3);
 
 /*Table structure for table `histori_pembayaran` */
 
@@ -178,9 +176,11 @@ CREATE TABLE `kategori_dokter` (
   `id_kat` mediumint(5) unsigned NOT NULL AUTO_INCREMENT,
   `nama_kat` varchar(199) DEFAULT NULL,
   PRIMARY KEY (`id_kat`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `kategori_dokter` */
+
+insert  into `kategori_dokter`(`id_kat`,`nama_kat`) values (1,'Umum'),(2,'Spesialis Anak'),(3,'Spesialis Kandungan');
 
 /*Table structure for table `konsultasi` */
 
