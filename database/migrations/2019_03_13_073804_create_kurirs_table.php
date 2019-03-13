@@ -18,6 +18,9 @@ class CreateKurirsTable extends Migration
             $table->string('nama');
             $table->string('telp');
             $table->string('alamat');
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->rememberToken();
             $table->timestamps();
         });
     }

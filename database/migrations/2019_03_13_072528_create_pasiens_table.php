@@ -20,6 +20,9 @@ class CreatePasiensTable extends Migration
             $table->string('alamat');
             $table->string('nomor_ktp');
             $table->string('telp');
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->rememberToken();
             $table->timestamps();
         });
     }

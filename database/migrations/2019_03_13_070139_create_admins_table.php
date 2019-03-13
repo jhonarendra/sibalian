@@ -18,6 +18,9 @@ class CreateAdminsTable extends Migration
             $table->string('nama');
             $table->string('alamat');
             $table->string('telp');
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->rememberToken();
             $table->timestamps();
         });
     }
