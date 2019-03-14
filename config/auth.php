@@ -46,6 +46,46 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
+
+        'api-admin' => [
+            'driver' => 'token',
+            'provider' => 'admins',
+            'hash' => false,
+        ],
+        'dokter' => [
+            'driver' => 'session',
+            'provider' => 'dokters',
+        ],
+
+        'api-dokter' => [
+            'driver' => 'token',
+            'provider' => 'dokters',
+            'hash' => false,
+        ],
+        'apotek' => [
+            'driver' => 'session',
+            'provider' => 'apoteks',
+        ],
+
+        'api-apotek' => [
+            'driver' => 'token',
+            'provider' => 'apoteks',
+            'hash' => false,
+        ],
+        'kurir' => [
+            'driver' => 'session',
+            'provider' => 'kurirs',
+        ],
+
+        'api-kurirs' => [
+            'driver' => 'token',
+            'provider' => 'kurirs',
+            'hash' => false,
+        ],
     ],
 
     /*
@@ -68,7 +108,23 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => App\Pasien::class,
+        ],
+        'dokters' => [
+            'driver' => 'eloquent',
+            'model' => App\Dokter::class,
+        ],
+        'apoteks' => [
+            'driver' => 'eloquent',
+            'model' => App\Apotek::class,
+        ],
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Admin::class,
+        ],
+        'kurirs' => [
+            'driver' => 'eloquent',
+            'model' => App\Kurir::class,
         ],
 
         // 'users' => [
@@ -95,6 +151,26 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+        'admins' => [
+            'provider' => 'admins',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+        'dokters' => [
+            'provider' => 'dokters',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+        'apoteks' => [
+            'provider' => 'apoteks',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+        'kurirs' => [
+            'provider' => 'kurirs',
             'table' => 'password_resets',
             'expire' => 60,
         ],

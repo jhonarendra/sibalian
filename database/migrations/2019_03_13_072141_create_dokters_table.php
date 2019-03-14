@@ -21,6 +21,9 @@ class CreateDoktersTable extends Migration
             $table->string('alamat');
             $table->unsignedBigInteger('id_kategori');
             $table->foreign('id_kategori')->references('id')->on('kategori_dokters');
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->rememberToken();
             $table->timestamps();
         });
     }

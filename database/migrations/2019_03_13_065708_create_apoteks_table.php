@@ -18,6 +18,9 @@ class CreateApoteksTable extends Migration
             $table->string('nama_apotek');
             $table->string('alamat');
             $table->string('telp');
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->rememberToken();
             $table->timestamps();
         });
     }

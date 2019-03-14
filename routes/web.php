@@ -71,3 +71,7 @@ Route::get('/', function () {
 
 Route::get('/dokter/filter', 'DokterController@index'); // si user mau nyari dokter, isi filter untuk nanti konsultasi 'filter' nanti ganti sama parameter harga dokter, jenis dokter
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
