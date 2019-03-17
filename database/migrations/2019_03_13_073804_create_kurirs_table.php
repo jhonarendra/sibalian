@@ -16,6 +16,7 @@ class CreateKurirsTable extends Migration
         Schema::create('kurirs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nama');
+            //$table->string('username');
             $table->string('telp');
             $table->string('alamat');
             $table->string('email')->unique();

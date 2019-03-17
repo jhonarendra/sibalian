@@ -74,4 +74,20 @@ Route::get('/dokter/filter', 'DokterController@index'); // si user mau nyari dok
 
 Auth::routes();
 
+//admin routes
+Route::group(['prefix' => 'admin'], function () {
+// Login Routes...
+    Route::get('login', ['as' => 'admin.login', 'uses' => 'AdminAuth\LoginController@showLoginForm']);
+    Route::post('login', ['as' => 'admin.login.post', 'uses' => 'AdminAuth\LoginController@login']);
+    Route::post('logout', ['as' => 'admin.logout', 'uses' => 'AdminAuth\LoginController@logout']);
+
+// Registration Routes...
+    Route::get('register', ['as' => 'admin.register', 'uses' => 'AdminAuth\RegisterController@showRegistrationForm']);
+    Route::post('register', ['as' => 'admin.register.post', 'uses' => 'AdminAuth\RegisterController@register']);
+});
+
+Route::get('/admin', function () {
+    return view('home');
+})->name('admin')->middleware('auth:admin');
+
 Route::get('/home', 'HomeController@index')->name('home');

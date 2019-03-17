@@ -108,7 +108,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\Pasien::class,
+            'model' => App\User::class,
         ],
         'dokters' => [
             'driver' => 'eloquent',
