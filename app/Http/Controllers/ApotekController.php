@@ -3,8 +3,119 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Apotek;
+use App\DetailObat;
+use App\Obat;
+use App\JenisObat;
 
 class ApotekController extends Controller
 {
-    //
+    //fungsi untuk mengambil data profil apotek
+    public function getProfil($id){
+
+    	//find apotek via ID
+    	$apotek = Apotek::find($id);
+
+    	//check apotek found or not
+    	return $apotek;
+    }
+
+    //fungsi update profil apotek
+    public function updateProfil($id, Request $request){
+
+        //get request data
+        $nama_apotek = $request->nama_apotek;
+        $alamat = $request->alamat;
+        $telp = $request->telp;
+
+        //find apotek with ID and updated it
+        $apotek = Apotek::find($id);
+        $apotek->nama_apotek = $nama_apotek;
+        $apotek->alamat = $alamat;
+        $apotek->telp = $telp;
+        $apotek->save();
+
+    	return response()->json([
+            'message' => 'success'
+        ]);
+    }
+
+    //fungsi menghapus data apotek
+    public function deleteProfil($id){
+        $apotek = Apotek::find($id);
+        $apotek->delete();
+
+        return response()->json([
+            'message' => 'success'
+        ]);
+    }
+
+    //fungsi menampilkan list nama obat yang tersedia
+    public function getNamaObat(){
+        $obat = Obat::all();
+
+        return $obat;
+    }
+
+    //fungsi menambah obat pada tabel detail obat
+    public function addObat($id, Request $request){
+
+        //id_obat didapatkan dari list obat yg ditampilkan pada fungsi getNamaObat()
+        $obat = new DetailObat([
+            'id_obat' => $request->id_obat,
+            'id_apotek' => $id,
+            'harga' => $request->harga,
+            'stok' => $request->stok
+        ]);
+        $obat->save();
+
+        return response()->json([
+            'message' => 'success'
+        ]);
+    }
+
+    //menampilkan list obat yang dimiliki apotek dengan $id
+    public function getObat($id){
+        $obat = DetailObat::where('id_apotek', $id)->get();
+
+        return $obat;
+    }
+
+
+    /**
+    NOTE :
+        Fungsi dibawah merupakan fungsi yang digunakan untuk
+        1. addNamaObat  = ketika nama obat yang akan diinputkan tidak tersedia di DetailObat
+        2. addJenisObat = menambahkan data jenis obat
+        3. getJenisObat = menampilkan data jenis obat ketika akan menginputkan nama obat baru
+    **/
+
+    public function addNamaObat(Request $request){
+        $namaObat = new Obat([
+            'nama_obat' => $request->nama_obat,
+            'id_jenis_obat' => $request->id_jenis_obat
+        ]);
+        $namaObat->save();
+
+        return response()->json([
+            'message' => 'success'
+        ]);
+    }
+
+    public function addJenisObat(Request $request){
+        $jenisObat = new JenisObat([
+            'nama_jenis_obat' => $request->nama_jenis_obat
+        ]);
+        $jenisObat->save();
+
+        return response()->json([
+            'message' => 'success'
+        ]);
+    }
+
+    public function getJenisObat(){
+        $jenisObat = JenisObat::all();
+
+        return $jenisObat;
+    }
 }
