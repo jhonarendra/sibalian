@@ -51,11 +51,6 @@ class ApotekController extends Controller
     }
 
     //fungsi menampilkan list nama obat yang tersedia
-    public function getNamaObat(){
-        $obat = Obat::all();
-
-        return $obat;
-    }
 
     //fungsi menambah obat pada tabel detail obat
     public function addObat($id, Request $request){
@@ -86,8 +81,9 @@ class ApotekController extends Controller
     NOTE :
         Fungsi dibawah merupakan fungsi yang digunakan untuk
         1. addNamaObat  = ketika nama obat yang akan diinputkan tidak tersedia di DetailObat
-        2. addJenisObat = menambahkan data jenis obat
-        3. getJenisObat = menampilkan data jenis obat ketika akan menginputkan nama obat baru
+        2. getNamaObat  = menampilkan nama obat
+        3. addJenisObat = menambahkan data jenis obat
+        4. getJenisObat = menampilkan data jenis obat ketika akan menginputkan nama obat baru
     **/
 
     public function addNamaObat(Request $request){
@@ -100,6 +96,12 @@ class ApotekController extends Controller
         return response()->json([
             'message' => 'success'
         ]);
+    }
+
+    public function getNamaObat(){
+        $obat = Obat::all();
+
+        return $obat;
     }
 
     public function addJenisObat(Request $request){
