@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemadesigner version="6.5">
+<source>
+<database charset="latin1" collation="latin1_swedish_ci">sibalian</database>
+</source>
+<canvas zoom="100">
+<tables>
+<table name="users" view="colnames">
+<left>228</left>
+<top>35</top>
+<width>145</width>
+<height>248</height>
+<sql_create_table>CREATE TABLE `users` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `alamat` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `telp` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_email_unique` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci</sql_create_table>
+</table>
+<table name="konsultasis" view="colnames">
+<left>451</left>
+<top>33</top>
+<width>141</width>
+<height>214</height>
+<sql_create_table>CREATE TABLE `konsultasis` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `id_dokter` bigint(20) unsigned NOT NULL,
+  `biaya_konsultasi` int(11) NOT NULL,
+  `id_user` bigint(20) unsigned NOT NULL,
+  `tgl_mulai` date NOT NULL,
+  `tgl_selesai` date NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `konsultasis_id_dokter_foreign` (`id_dokter`),
+  KEY `konsultasis_id_user_foreign` (`id_user`),
+  CONSTRAINT `konsultasis_id_dokter_foreign` FOREIGN KEY (`id_dokter`) REFERENCES `dokters` (`id`),
+  CONSTRAINT `konsultasis_id_user_foreign` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci</sql_create_table>
+</table>
+<table name="dokters" view="colnames">
+<left>650</left>
+<top>23</top>
+<width>145</width>
+<height>265</height>
+<sql_create_table>CREATE TABLE `dokters` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `nama_dokter` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ttl_dokter` date NOT NULL,
+  `telp` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `alamat` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_kategori` bigint(20) unsigned NOT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `dokters_email_unique` (`email`),
+  KEY `dokters_id_kategori_foreign` (`id_kategori`),
+  CONSTRAINT `dokters_id_kategori_foreign` FOREIGN KEY (`id_kategori`) REFERENCES `kategori_dokters` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci</sql_create_table>
+</table>
+<table name="detail_konsultasis" view="colnames">
+<left>215</left>
+<top>337</top>
+<width>120</width>
+<height>180</height>
+<sql_create_table>CREATE TABLE `detail_konsultasis` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `id_konsultasi` bigint(20) unsigned NOT NULL,
+  `pesan` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `oleh` enum('dokter','pasien') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `detail_konsultasis_id_konsultasi_foreign` (`id_konsultasi`),
+  CONSTRAINT `detail_konsultasis_id_konsultasi_foreign` FOREIGN KEY (`id_konsultasi`) REFERENCES `konsultasis` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci</sql_create_table>
+</table>
+<table name="kategori_dokters" view="colnames">
+<left>859</left>
+<top>24</top>
+<width>132</width>
+<height>146</height>
+<sql_create_table>CREATE TABLE `kategori_dokters` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `nama_kategori` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci</sql_create_table>
+</table>
+<table name="order_obats" view="colnames">
+<left>455</left>
+<top>312</top>
+<width>153</width>
+<height>248</height>
+<sql_create_table>CREATE TABLE `order_obats` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `id_kurir` bigint(20) unsigned NOT NULL,
+  `id_dokter` bigint(20) unsigned NOT NULL,
+  `resep_dokter` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `total` int(11) NOT NULL,
+  `status` enum('lunas','belum_lunas') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `bukti_pembayaran` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `id_user` bigint(20) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `order_obats_id_kurir_foreign` (`id_kurir`),
+  KEY `order_obats_id_dokter_foreign` (`id_dokter`),
+  KEY `order_obats_id_user_foreign` (`id_user`),
+  CONSTRAINT `order_obats_id_dokter_foreign` FOREIGN KEY (`id_dokter`) REFERENCES `dokters` (`id`),
+  CONSTRAINT `order_obats_id_kurir_foreign` FOREIGN KEY (`id_kurir`) REFERENCES `kurirs` (`id`),
+  CONSTRAINT `order_obats_id_user_foreign` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci</sql_create_table>
+</table>
+<table name="kurirs" view="colnames">
+<left>657</left>
+<top>324</top>
+<width>145</width>
+<height>231</height>
+<sql_create_table>CREATE TABLE `kurirs` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `nama` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `telp` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `alamat` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `kurirs_email_unique` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci</sql_create_table>
+</table>
+<table name="obats" view="colnames">
+<left>643</left>
+<top>566</top>
+<width>122</width>
+<height>163</height>
+<sql_create_table>CREATE TABLE `obats` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `nama_obat` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_jenis_obat` bigint(20) unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `obats_id_jenis_obat_foreign` (`id_jenis_obat`),
+  CONSTRAINT `obats_id_jenis_obat_foreign` FOREIGN KEY (`id_jenis_obat`) REFERENCES `jenis_obats` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci</sql_create_table>
+</table>
+<table name="detail_obats" view="colnames">
+<left>504</left>
+<top>640</top>
+<width>110</width>
+<height>197</height>
+<sql_create_table>CREATE TABLE `detail_obats` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `id_obat` bigint(20) unsigned NOT NULL,
+  `id_apotek` bigint(20) unsigned NOT NULL,
+  `harga` int(11) NOT NULL,
+  `stok` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `detail_obats_id_obat_foreign` (`id_obat`),
+  KEY `detail_obats_id_apotek_foreign` (`id_apotek`),
+  CONSTRAINT `detail_obats_id_apotek_foreign` FOREIGN KEY (`id_apotek`) REFERENCES `apoteks` (`id`),
+  CONSTRAINT `detail_obats_id_obat_foreign` FOREIGN KEY (`id_obat`) REFERENCES `obats` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci</sql_create_table>
+</table>
+<table name="detail_order_obats" view="colnames">
+<left>283</left>
+<top>562</top>
+<width>126</width>
+<height>180</height>
+<sql_create_table>CREATE TABLE `detail_order_obats` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `id_detail_obat` bigint(20) unsigned NOT NULL,
+  `id_order_obat` bigint(20) unsigned NOT NULL,
+  `jumlah_obat` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `detail_order_obats_id_detail_obat_foreign` (`id_detail_obat`),
+  KEY `detail_order_obats_id_order_obat_foreign` (`id_order_obat`),
+  CONSTRAINT `detail_order_obats_id_detail_obat_foreign` FOREIGN KEY (`id_detail_obat`) REFERENCES `detail_obats` (`id`),
+  CONSTRAINT `detail_order_obats_id_order_obat_foreign` FOREIGN KEY (`id_order_obat`) REFERENCES `order_obats` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci</sql_create_table>
+</table>
+<table name="detail_pakets" view="colnames">
+<left>879</left>
+<top>220</top>
+<width>110</width>
+<height>180</height>
+<sql_create_table>CREATE TABLE `detail_pakets` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `id_dokter` bigint(20) unsigned NOT NULL,
+  `harga` int(11) NOT NULL,
+  `id_paket` bigint(20) unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `detail_pakets_id_dokter_foreign` (`id_dokter`),
+  KEY `detail_pakets_id_paket_foreign` (`id_paket`),
+  CONSTRAINT `detail_pakets_id_dokter_foreign` FOREIGN KEY (`id_dokter`) REFERENCES `dokters` (`id`),
+  CONSTRAINT `detail_pakets_id_paket_foreign` FOREIGN KEY (`id_paket`) REFERENCES `paket_bayars` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci</sql_create_table>
+</table>
+<table name="apoteks" view="colnames">
+<left>665</left>
+<top>781</top>
+<width>145</width>
+<height>231</height>
+<sql_create_table>CREATE TABLE `apoteks` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `nama_apotek` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `alamat` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `telp` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `apoteks_email_unique` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci</sql_create_table>
+</table>
+<table name="history_pembayarans" view="colnames">
+<left>25</left>
+<top>177</top>
+<width>139</width>
+<height>197</height>
+<sql_create_table>CREATE TABLE `history_pembayarans` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `id_user` bigint(20) unsigned NOT NULL,
+  `tgl_pembayaran` datetime NOT NULL,
+  `id_detail_konsul` bigint(20) unsigned NOT NULL,
+  `id_order_obat` bigint(20) unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `history_pembayarans_id_user_foreign` (`id_user`),
+  KEY `history_pembayarans_id_detail_konsul_foreign` (`id_detail_konsul`),
+  KEY `history_pembayarans_id_order_obat_foreign` (`id_order_obat`),
+  CONSTRAINT `history_pembayarans_id_detail_konsul_foreign` FOREIGN KEY (`id_detail_konsul`) REFERENCES `detail_konsultasis` (`id`),
+  CONSTRAINT `history_pembayarans_id_order_obat_foreign` FOREIGN KEY (`id_order_obat`) REFERENCES `order_obats` (`id`),
+  CONSTRAINT `history_pembayarans_id_user_foreign` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci</sql_create_table>
+</table>
+<table name="pasiens" view="colnames">
+<left>28</left>
+<top>433</top>
+<width>145</width>
+<height>265</height>
+<sql_create_table>CREATE TABLE `pasiens` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `nama` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tanggal lahir` date NOT NULL,
+  `alamat` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nomor_ktp` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `telp` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `pasiens_email_unique` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci</sql_create_table>
+</table>
+<table name="riwayat_penyakits" view="colnames">
+<left>30</left>
+<top>7</top>
+<width>110</width>
+<height>163</height>
+<sql_create_table>CREATE TABLE `riwayat_penyakits` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `penyakit` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `id_user` bigint(20) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `riwayat_penyakits_id_user_foreign` (`id_user`),
+  CONSTRAINT `riwayat_penyakits_id_user_foreign` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci</sql_create_table>
+</table>
+<table name="paket_bayars" view="colnames">
+<left>1008</left>
+<top>415</top>
+<width>112</width>
+<height>146</height>
+<sql_create_table>CREATE TABLE `paket_bayars` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `jenis_paket` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci</sql_create_table>
+</table>
+<table name="jenis_obats" view="colnames">
+<left>819</left>
+<top>572</top>
+<width>144</width>
+<height>146</height>
+<sql_create_table>CREATE TABLE `jenis_obats` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `nama_jenis_obat` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci</sql_create_table>
+</table>
+<table name="balasans" view="colnames">
+<left>50</left>
+<top>764</top>
+<width>110</width>
+<height>180</height>
+<sql_create_table>CREATE TABLE `balasans` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `id_user` bigint(20) unsigned NOT NULL,
+  `id_dokter` bigint(20) unsigned NOT NULL,
+  `balasan` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `balasans_id_user_foreign` (`id_user`),
+  KEY `balasans_id_dokter_foreign` (`id_dokter`),
+  CONSTRAINT `balasans_id_dokter_foreign` FOREIGN KEY (`id_dokter`) REFERENCES `dokters` (`id`),
+  CONSTRAINT `balasans_id_user_foreign` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci</sql_create_table>
+</table>
+<table name="topiks" view="colnames">
+<left>447</left>
+<top>861</top>
+<width>112</width>
+<height>180</height>
+<sql_create_table>CREATE TABLE `topiks` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `id_user` bigint(20) unsigned NOT NULL,
+  `judul_topik` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `detail_topik` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `topiks_id_user_foreign` (`id_user`),
+  CONSTRAINT `topiks_id_user_foreign` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci</sql_create_table>
+</table>
+</tables>
+</canvas>
+</schemadesigner>
