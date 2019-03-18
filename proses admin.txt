@@ -1,0 +1,35 @@
+Forum
+User bisa membuat thread: - judul (pertanyaan)
+			  - detil pertanyaan
+			  - ada kirim foto
+Yang jawab bisa user lain bisa dokter. (siapa tau user lain punya pengalaman yang sama).
+
+contoh:
+
+si A bikin thread "Anak saya panas 3 hari"
+detil pertanyaan isi penjelasannya.
+
+trus si user B komen "Anak saya juga, cukup dikasi obat ... bisa sembuh"
+
+trus dokter juga bisa komen "Oh itu perlu ditangani lebih lanjut. silahkan chat saya"
+
+
+tabel:
+topik
+-------------
+id_topik
+id_user
+judul_topik
+created_at            
+updated_at
+
+balasan
+--------------
+id_balasan
+id_topik
+id_user (nullable)
+id_dokter (nullable)
+balasan (text)
+created_at
+updated_at
+
