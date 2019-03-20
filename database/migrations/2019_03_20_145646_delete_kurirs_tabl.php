@@ -15,7 +15,7 @@ class DeleteKurirsTabl extends Migration
     {
         //
         Schema::table('order_obats', function (Blueprint $table) {
-            // $table->dropForeign(['id_kurir']);
+            $table->dropForeign(['id_kurir']);
             if (Schema::hasColumn('order_obats','id_kurir')) {
                 //
                
