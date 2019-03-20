@@ -71,10 +71,25 @@ Route::get('/', function () {
 
 Route::get('/dokter/filter', 'DokterController@index'); // si user mau nyari dokter, isi filter untuk nanti konsultasi 'filter' nanti ganti sama parameter harga dokter, jenis dokter
 
-
+//ROUTE USER
 Auth::routes();
 
-//admin routes
+//ROUTE DOKTER
+Route::group(['prefix' => 'dokter'], function () {
+// Login Routes...
+    Route::get('login', ['as' => 'dokter.login', 'uses' => 'DokterAuth\LoginController@showLoginForm']);
+    Route::post('login', ['as' => 'dokter.login.post', 'uses' => 'DokterAuth\LoginController@login']);
+    Route::post('logout', ['as' => 'dokter.logout', 'uses' => 'DokterAuth\LoginController@logout']);
+
+// Registration Routes...
+    Route::get('register', ['as' => 'dokter.register', 'uses' => 'DokterAuth\RegisterController@showRegistrationForm']);
+    Route::post('register', ['as' => 'dokter.register.post', 'uses' => 'DokterAuth\RegisterController@register']);
+});
+Route::get('/dokter', function () {
+    return view('home');
+})->name('dokter')->middleware('auth:dokter');//coba sementara
+
+//ROUTE ADMIN
 Route::group(['prefix' => 'admin'], function () {
 // Login Routes...
     Route::get('login', ['as' => 'admin.login', 'uses' => 'AdminAuth\LoginController@showLoginForm']);

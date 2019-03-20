@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\AdminAuth;
+namespace App\Http\Controllers\DokterAuth;
 
-use App\Admin;
+use App\Dokter;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\KategoriDokter;
 
 class RegisterController extends Controller
 {
@@ -28,11 +29,12 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/admin';
+    protected $redirectTo = '/dokter';
 
     public function showRegistrationForm()
     {
-        return view('admin-auth.register');
+        $kategoridokter = KategoriDokter::all();
+        return view('dokter-auth.register', compact('kategoridokter'));
     }
 
     /**
@@ -47,7 +49,7 @@ class RegisterController extends Controller
 
     protected function guard()
     {
-        return auth()->guard('admin');
+        return auth()->guard('dokter');
     }
 
     /**
@@ -59,9 +61,11 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'nama_dokter' => ['required', 'string', 'max:255'],
+            'ttl_dokter' => ['required'],
             'alamat' => ['required', 'string', 'max:80'],
             'telp' => ['required','string', 'max:12'],
+            'id_kategori' => ['required'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -75,8 +79,9 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return Admin::create([
-            'name' => $data['name'],
+        return Dokter::create([
+            'nama_dokter' => $data['name'],
+            'ttl_dokter' => $data['ttl_dokter'],
             'email' => $data['email'],
             'alamat' => $data['alamat'],
             'telp' => $data['telp'],

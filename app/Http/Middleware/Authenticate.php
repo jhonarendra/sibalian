@@ -38,6 +38,9 @@ class Authenticate extends Middleware
         if ($guard == 'admin'){
             $request->path = 'admin.';
         }
+        else if ($guard == 'dokter'){
+            $request->path = 'dokter.';
+        }
         else{
             $request->path = '';
         }
