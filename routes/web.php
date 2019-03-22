@@ -69,7 +69,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dokter/filter', 'DokterController@index'); // si user mau nyari dokter, isi filter untuk nanti konsultasi 'filter' nanti ganti sama parameter harga dokter, jenis dokter
+// Route::get('/dokter/filter', 'DokterController@index'); si user mau nyari dokter, isi filter untuk nanti konsultasi 'filter' nanti ganti sama parameter harga dokter, jenis dokter
 
 //ROUTE USER
 Auth::routes();
