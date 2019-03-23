@@ -66,7 +66,7 @@ Bayangan
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 // Route::get('/dokter/filter', 'DokterController@index'); si user mau nyari dokter, isi filter untuk nanti konsultasi 'filter' nanti ganti sama parameter harga dokter, jenis dokter

@@ -1,0 +1,189 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background: #f5f5f5;
+    color:#424242;
+    font-family: 'Roboto', arial, sans-serif;
+}
+a {
+    text-decoration: none;
+    color:#485460;
+    letter-spacing: 3.3px;
+    line-height: .8;
+    text-decoration: none;
+}
+p{
+    font-size: .875em;
+    font-weight: 300;
+    line-height: 1.62em;
+    letter-spacing: 1.5px;
+}
+h2{
+    font-weight: 300;
+    font-size: 2.25em;
+    letter-spacing: 2px;
+    line-height: 1.2em;
+    text-transform: uppercase;
+}
+h4{
+    font-size: 1.125em;
+    text-transform: uppercase;
+    letter-spacing: 1.9px;
+    color:#2196F3;
+}
+#navbar{
+    width: 100%;
+    position: fixed;
+    background:#fff;
+    box-shadow: 0 5px 50px rgba(40,40,40,.15);
+    height: 85px;
+    z-index: 999;
+}
+.wrapper{
+    position: relative;
+    width: 1024px;
+    margin:0 auto;
+}
+#navbar .wrapper{
+    padding: 25px 0;
+}
+.navbar-brand{
+    float: left;
+    margin-right:20px;
+}
+.navbar-brand img{
+    height: 35px;
+}
+.navbar-menu ul{
+    list-style: none;
+}
+.navbar-menu ul li{
+    float:left;
+}
+.navbar-menu ul li a{
+    padding:0 20px;
+    line-height: 35px;
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+.navbar-right{
+    float:right;
+}
+
+.btn-icon{
+    font-size: 13px;
+    text-transform: uppercase;
+    height: 35px;
+    line-height: 35px;
+    border: 1px solid #2196F3;
+    border-radius: 4px;
+    padding-right: 10px;
+    color:#2196F3;
+}
+.btn-icon i{
+    background: #2196F3;
+    height: 34px;
+    line-height: 34px;
+    border-radius: 4px 0 0 4px;
+    padding: 0 10px;
+    color:#fff;
+    margin-right: 5px;
+}
+
+
+
+#jumbotron{
+    height: 580px;
+    padding-top:80px;
+    background:url('../images/sibalian-bg.png');
+    background-size: 100%;
+}
+.jumbo-text{
+    margin-top: 80px;
+}
+#jumbotron .jumbo-text h1{
+    width: 50%;
+    text-transform: uppercase;
+    font-size: 48px;
+    text-shadow: 0 2px 20px rgba(0,0,0,.7);
+    color:#fff;
+    margin-bottom: 50px;
+    font-weight: bold;
+}
+a.jumbo-btn{
+    color:#fff;
+    background:#3F51B5;
+    padding:25px 35px;
+    font-size: 16px;
+    text-transform: uppercase;
+    border-radius: 4px;
+    transition: all .5s;
+    font-weight: bold;
+}
+a.jumbo-btn:hover{
+    padding:29px 39px;
+}
+
+
+#fitur .wrapper{
+    padding: 80px 0;
+}
+#fitur h4{
+    padding-bottom: 20px;
+}
+#fitur h2{
+    padding: 40px 0;
+}
+#fitur p{
+    font-weight: 300;
+    margin-bottom: 30px;
+}
+#fitur a{
+    text-transform: uppercase;
+    font-size: .875em;
+    color: #2196F3;
+}
+
+
+.jo-col3, .jo-col4, .jo-col6, .jo-col9, .jo-col12{
+    position: relative;
+    padding:0 10px;
+    min-height: 1px;
+    float: left;
+}
+.jo-col12{
+    width:100%;
+}
+.jo-col9{
+    width:75%;
+}
+.jo-col6{
+    width:50%;
+}
+.jo-col4{
+    width:33.33334%;
+}
+.jo-col3{
+    width:24%;
+}
+
+
+#fitur .card-layanan{
+    margin-top:-180px;
+    padding:0 30px;
+}
+#fitur .card{
+    padding:20px;
+    height:350px;
+    background: #fff;
+}
+#fitur .card img{
+    width: 100%;
+    margin-top:-40px;
+}
+#fitur .card p{
+    margin-top:20px;
+}
