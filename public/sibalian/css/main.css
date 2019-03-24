@@ -14,6 +14,7 @@ a {
     letter-spacing: 3.3px;
     line-height: .8;
     text-decoration: none;
+    transition: all 0.5s;
 }
 p{
     font-size: .875em;
@@ -55,7 +56,8 @@ h4{
     margin-right:20px;
 }
 .navbar-brand img{
-    height: 35px;
+    height: 20px;
+    margin:7px 0;
 }
 .navbar-menu ul{
     list-style: none;
@@ -68,6 +70,10 @@ h4{
     line-height: 35px;
     font-size: 13px;
     letter-spacing: 1px;
+    transition: all 0.5s;
+}
+.navbar-menu ul li a:hover{
+    color:#2196F3;
 }
 .navbar-right{
     float:right;
@@ -110,21 +116,26 @@ h4{
     font-size: 48px;
     text-shadow: 0 2px 20px rgba(0,0,0,.7);
     color:#fff;
-    margin-bottom: 50px;
     font-weight: bold;
 }
-a.jumbo-btn{
+.jumbo-text img{
+    height: 20px;
+    margin:30px 0;
+}
+a.jumbo-btn button{
     color:#fff;
+    border: none;
     background:#3F51B5;
     padding:25px 35px;
     font-size: 16px;
     text-transform: uppercase;
     border-radius: 4px;
     transition: all .5s;
-    font-weight: bold;
+    letter-spacing: 3.3px;
+    cursor: pointer;
 }
-a.jumbo-btn:hover{
-    padding:29px 39px;
+a.jumbo-btn button:hover{
+    transform: scale(1.1);
 }
 
 
@@ -145,6 +156,9 @@ a.jumbo-btn:hover{
     text-transform: uppercase;
     font-size: .875em;
     color: #2196F3;
+}
+#fitur a:hover{
+    margin-left: 10px;
 }
 
 
@@ -179,6 +193,7 @@ a.jumbo-btn:hover{
     padding:20px;
     height:350px;
     background: #fff;
+    box-shadow: 0 2px 8px 0 rgba(0,0,0,.11);
 }
 #fitur .card img{
     width: 100%;
@@ -186,4 +201,75 @@ a.jumbo-btn:hover{
 }
 #fitur .card p{
     margin-top:20px;
+}
+
+#testimonial{
+    margin-bottom: 60px;
+}
+
+#testimonial .wrapper{
+    background:#fff;
+    padding: 40px 0;
+}
+#testimonial h4{
+    text-align: center;
+}
+#testimonial .line-gradient{
+    width: 50px;
+    height: 4px;
+    background: #2196F3;
+    margin:0 auto;
+    margin-top: 15px;
+    margin-bottom: 60px;
+}
+#testimonial .testi{
+    background:#343b41;
+    text-align: center;
+    color:#fff;
+    padding: 20px;
+}
+#testimonial .testi .line-gradient{
+    margin:60px auto 30px auto;
+    height: 2px;
+    background: #f9ae3c;
+}
+#testimonial .testi img{
+    border-radius: 50%;
+    margin-top:-50px;
+}
+#testimonial p{
+    margin-top: 30px;
+    font-size: 0.6em;
+}
+#testimonial h3{
+    font-weight: normal;
+    font-size: 13px;
+}
+
+#footer{
+    background:#343b41;
+    padding: 80px 0 120px 0;
+    color: #fff;
+}
+#footer img{
+    width: 100px;
+}
+#footer ul{
+    list-style: none;
+}
+#footer a{
+    color: #fff;
+    font-size: 12px;
+    line-height: 2em;
+}
+#footer a:hover{
+    color:#2196F3;
+}
+#footer a i{
+    font-size: 20px;
+    padding: 10px;
+}
+
+.jo-hide{
+    visibility: hidden;
 }
