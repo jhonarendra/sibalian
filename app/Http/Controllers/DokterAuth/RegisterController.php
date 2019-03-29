@@ -62,7 +62,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'nama_dokter' => ['required', 'string', 'max:255'],
-            'ttl_dokter' => ['required'],
+            'ttl_dokter' => ['required','date'],
             'alamat' => ['required', 'string', 'max:80'],
             'telp' => ['required','string', 'max:12'],
             'id_kategori' => ['required'],
@@ -80,8 +80,9 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return Dokter::create([
-            'nama_dokter' => $data['name'],
+            'nama_dokter' => $data['nama_dokter'],
             'ttl_dokter' => $data['ttl_dokter'],
+            'id_kategori' => $data['id_kategori'],
             'email' => $data['email'],
             'alamat' => $data['alamat'],
             'telp' => $data['telp'],

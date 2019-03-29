@@ -18,7 +18,7 @@ class Dokter extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'nama_dokter','ttl_dokter,','id_kategori', 'alamat','telp','email', 'password',
+        'nama_dokter','ttl_dokter','id_kategori', 'alamat','telp','email', 'password',
     ];
 
     /**
