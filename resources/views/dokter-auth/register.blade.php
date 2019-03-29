@@ -29,7 +29,7 @@
                             <label for="ttl_dokter" class="col-md-4 col-form-label text-md-right">{{ __('Tanggal Lahir') }}</label>
 
                             <div class="col-md-6">
-                                <input type="date" class="form-control{{ $errors->has('ttl_dokter') ? ' is-invalid' : '' }}" name="ttl_dokter" id="ttl_dokter">
+                                <input id="ttl_dokter" type="date" class="form-control{{ $errors->has('ttl_dokter') ? ' is-invalid' : '' }}" name="ttl_dokter" value="{{ old('ttl_dokter') }}" required >
                             
                                 @if ($errors->has('ttl_dokter'))
                                     <span class="invalid-feedback" role="alert">
@@ -44,7 +44,7 @@
 
                             <div class="col-md-6">
 
-                                <select class="custom-select">
+                                <select class="custom-select" name="id_kategori">
                                     @foreach($kategoridokter as $k)
                                     <option value="{{$k->id}}">{{$k->nama_kategori}}</option>
                                     @endforeach
