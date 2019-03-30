@@ -47,3 +47,4 @@ Route::get('apotek/{id}/historyPesanan', 'Apotek\PesananController@historyPesana
 /*
 	APOTEK API END HERE
 **/
+

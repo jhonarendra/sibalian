@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Dokter;
+use Validator;
+use Illuminate\Support\Facades\Auth; 
 
 class DokterController extends Controller
 {
+    public $successStatus = 200;
     /**
      * Display a listing of the resource.
      *
@@ -17,6 +20,11 @@ class DokterController extends Controller
         $dokter = Dokter::join('kategori_dokter','dokter.id_kat','=','kategori_dokter.id_kat')->get();
         return response()->json($dokter);
     }
+
+    //register api
+
+    //login api
+
 
     /**
      * Show the form for creating a new resource.
