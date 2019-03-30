@@ -86,7 +86,7 @@ class ApotekController extends Controller
     public function getObat($id){
         $obat = DetailObat::join('obats','detail_obats.id_obat','=','obats.id')
                             ->where('id_apotek',$id)
-                            ->select('detail_obats.id','nama_obat','stok','harga')
+                            ->select('detail_obats.id as id_detail_obat','id_obat','nama_obat','stok','harga')
                             ->get();
         return $obat;
     }
