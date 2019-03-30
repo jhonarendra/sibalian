@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Apotek;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Apotek;
 use App\DetailObat;
@@ -10,6 +11,11 @@ use App\JenisObat;
 
 class ApotekController extends Controller
 {
+
+    /**
+        CRUD APOTEK START HERE
+    */
+
     //fungsi untuk mengambil data profil apotek
     public function getProfil($id){
 
@@ -50,7 +56,14 @@ class ApotekController extends Controller
         ]);
     }
 
-    //fungsi menampilkan list nama obat yang tersedia
+    /*
+        CRUD APOTEK END HERE
+    **/
+
+
+    /**
+        CRUD OBAT START HERE
+    */
 
     //fungsi menambah obat pada tabel detail obat
     public function addObat($id, Request $request){
@@ -71,10 +84,40 @@ class ApotekController extends Controller
 
     //menampilkan list obat yang dimiliki apotek dengan $id
     public function getObat($id){
-        $obat = DetailObat::where('id_apotek', $id)->get();
-
+        $obat = DetailObat::join('obats','detail_obats.id_obat','=','obats.id')
+                            ->where('id_apotek',$id)
+                            ->select('detail_obats.id as id_detail_obat','id_obat','nama_obat','stok','harga')
+                            ->get();
         return $obat;
     }
+
+    //fungsi update data obat
+    public function updateObat($id, Request $request){
+        $id_obat = $request->id_obat;
+        $stok = $request->stok;
+        $harga = $request->harga;
+
+        $updated = DetailObat::where([['id_apotek','=',$id],
+                                   ['id','=',$id_obat]])
+                            ->update(['stok' => $stok, 'harga' => $harga]);
+
+
+        if($updated){
+            return response()->json([
+                'message' => 'success'
+            ]);
+        } else {
+            return response()->json([
+                'message' => 'update failed'
+            ]);
+        }
+
+    }
+
+
+    /*
+        CRUD OBAT END HERE
+    **/
 
 
     /**
@@ -99,7 +142,9 @@ class ApotekController extends Controller
     }
 
     public function getNamaObat(){
-        $obat = Obat::all();
+        $obat = Obat::join('jenis_obats','obats.id_jenis_obat','jenis_obats.id')
+                    ->select('obats.id','nama_obat','id_jenis_obat','nama_jenis_obat')
+                    ->get();
 
         return $obat;
     }
