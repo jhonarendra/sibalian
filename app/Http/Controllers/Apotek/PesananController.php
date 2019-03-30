@@ -49,20 +49,20 @@ class PesananController extends Controller
 	}
 
 	//fungsi ketika pesanan ditolak
-	public function tolakPesanan($id_apotek, $id_order){
-		$transaksi = OrderObat::where('id', $id_order)
-							  ->update(['status' => 'pesanan ditolak']);
+	// public function tolakPesanan($id_apotek, $id_order){
+	// 	$transaksi = OrderObat::where('id', $id_order)
+	// 						  ->update(['status' => 'pesanan ditolak']);
 
-		if($transaksi){
-            return response()->json([
-                'message' => 'pesanan ditolak'
-            ]);
-        } else {
-            return response()->json([
-                'message' => 'update failed'
-            ]);
-        }
-	}
+	// 	if($transaksi){
+    //         return response()->json([
+    //             'message' => 'pesanan ditolak'
+    //         ]);
+    //     } else {
+    //         return response()->json([
+    //             'message' => 'update failed'
+    //         ]);
+    //     }
+	// }
 
 	//fungsi menampilkan pesanan yang sedang diproses
 	public function getPesananProses($id){

@@ -48,3 +48,5 @@ Route::get('apotek/{id}/historyPesanan', 'Apotek\PesananController@historyPesana
 	APOTEK API END HERE
 **/
 
+Route::get('dokter/{id}/konsultasi', 'DokterController@getKonsultasi'); //get list pesanan
+Route::post('dokter/{id}/konsultasi/{id_dokter}/terima', 'DokterController@terimaKonsultasi');
