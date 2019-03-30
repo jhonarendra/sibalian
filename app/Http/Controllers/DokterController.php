@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Dokter;
+use App\Konsultasi;
+use Validator;
+use Illuminate\Support\Facades\Auth; 
 
 class DokterController extends Controller
 {
+    public $successStatus = 200;
     /**
      * Display a listing of the resource.
      *
@@ -17,6 +21,11 @@ class DokterController extends Controller
         $dokter = Dokter::join('kategori_dokter','dokter.id_kat','=','kategori_dokter.id_kat')->get();
         return response()->json($dokter);
     }
+
+    //register api
+
+    //login api
+
 
     /**
      * Show the form for creating a new resource.
@@ -82,5 +91,33 @@ class DokterController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function getKonsultasi($id){
+		$konsultasi = Konsultasi::join('users','konsultasis.id_user','=','users.id')
+							  ->where('id_dokter', $id)
+							  ->select('name', 'biaya_konsultasi','tgl_mulai','tgl_selesai','status')
+							  ->get();
+		return $konsultasi;
+    }
+    public function terimaKonsultasi(Request $request,$id, $id_dokter){
+        // departure_time' => date("H:i:s", strtotime(request('departureTime')));
+        $biaya = $request->biaya_konsultasi;
+        // $tgl_mulai = $request->tgl_mulai;
+        // $tgl_selesai = $request->tgl_selesai;
+        $tgl_mulai = date("Y-m-d", strtotime(request('tgl_mulai')));
+        $tgl_selesai = date("Y-m-d", strtotime(request('tgl_selesai')));
+        $updated = Konsultasi::where([
+                                    ['id', $id],
+                                    ['id_dokter', $id_dokter] //menamplikan transaksi dengan status yg telah dibayar
+                                ])->update(['status' => 'diterima', 'tgl_selesai' => $tgl_selesai, 'tgl_mulai'=>$tgl_mulai, 'biaya_konsultasi' =>$biaya  ]);
+        if($updated){
+            return response()->json([
+                'message' => 'sukses di aprove'
+            ]);
+        } else {
+            return response()->json([
+                'message' => 'update failed'
+            ]);
+        }
     }
 }

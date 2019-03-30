@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>[Admin] Si Balian | Sistem Bantuan Medis dan Layanan Informasi</title>
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../../public/sibalian/icon/fontawesome/css/all.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+	<nav id="navbar">
+		<div class="wrapper">
+			<p>Hello, Admin <i class="far fa-user"></i></p>
+		</div>
+	</nav>
+	<div id="content-wrapper">
+		<div class="wrapper">
+			<div class="sidebar jo-col3" style="border-right: 1px solid #ddd">
+				<div class="photo-wrapper">
+					<i class="fas fa-camera"></i>
+				</div>
+				<div class="sidebar-menu">
+					<ul>
+						<li><i class="fas fa-home"></i><a href="dashboard.html">Dashboard</a></li>
+						<hr />
+						<li><i class="fas fa-user-injured"></i><a class="active" href="pasien.html">Pasien</a></li>
+						<li><i class="fas fa-user-md"></i><a href="dokter.html">Dokter</a></li>
+						<li><i class="far fa-hospital"></i><a href="apotek.html">Apotek</a></li>
+						<li><i class="fas fa-motorcycle"></i><a href="kurir.html">Kurir</a></li>
+						<hr />
+						<li><i class="fas fa-clipboard-list"></i><a href="data-transaksi.html">Data Transaksi</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="content jo-col9">
+				<div class="page-title">
+					<h3>Pasien</h3>
+				</div>
+				<table class="table" style="margin-top: 30px">
+					<thead>
+						<tr>
+							<th>No.</th>
+							<th>Nama</th>
+							<th>Alamat</th>
+							<th>No. Telp</th>
+							<th>Medical History</th>
+							<th>Status</th>
+							<th>Opsi</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>1.</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>
+								<a class="popup-show"><i class="fas fa-clipboard-list"></i>click me</a>
+								<a href=""><i class="fas fa-print"></i></a>
+								<a href=""><i class="far fa-trash-alt"></i></a>
+							</td>
+						</tr>
+						<tr>
+							<td>2.</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>
+								<a href=""><i class="fas fa-clipboard-list"></i></a>
+								<a href=""><i class="fas fa-print"></i></a>
+								<a href=""><i class="far fa-trash-alt"></i></a>
+							</td>
+						</tr>
+						<tr>
+							<td>3.</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>
+								<a href=""><i class="fas fa-clipboard-list"></i></a>
+								<a href=""><i class="fas fa-print"></i></a>
+								<a href=""><i class="far fa-trash-alt"></i></a>
+							</td>
+						</tr>
+						<tr>
+							<td>4.</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>
+								<a href=""><i class="fas fa-clipboard-list"></i></a>
+								<a href=""><i class="fas fa-print"></i></a>
+								<a href=""><i class="far fa-trash-alt"></i></a>
+							</td>
+						</tr>
+						<tr>
+							<td>5.</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>
+								<a href=""><i class="fas fa-clipboard-list"></i></a>
+								<a href=""><i class="fas fa-print"></i></a>
+								<a href=""><i class="far fa-trash-alt"></i></a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div style="clear: both"></div>
+	<div class="overlay"></div>
+	<div class="popup">
+		<h3>Edit Data Pasien</h3><br />
+		<p><label for="nama-pasien">Nama:</label></p>
+		<input type="text" name="nama-pasien" id="nama-pasien" /><br /><br />
+		<p><label for="alamat-pasien">Alamat:</label></p>
+		<input type="text" name="alamat-pasien" id="nama-pasien"/><br /><br />
+		<p><label for="no-telp">No. Telp:</label></p>
+		<input type="text" name="no-telp" id="no-telp"/><br /><br />
+		<p><label for="medical-history">Medical history:</label></p>
+		<input type="text" name="medical-history" id="medical-history"/><br /><br />
+		<p><label for="status">Status:</label></p>
+		<input type="text" name="status" id="status"/><br /><br />
+		<p style="text-align: right;"><a href="">Reset</a><a class="batal">Batal</a><a href="">Simpan</a></p>
+	</div>
+	<script type="text/javascript" src="../../public/sibalian/js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>
+</body>
+</html>
