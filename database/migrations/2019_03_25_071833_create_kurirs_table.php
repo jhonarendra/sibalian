@@ -19,6 +19,7 @@ class CreateKurirsTable extends Migration
             $table->string('telepon',25);
             $table->string('email');
             $table->string('password');
+            $table->string('foto_ktp');
             $table->timestamps();
         });
     }
