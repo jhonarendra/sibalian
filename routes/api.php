@@ -29,3 +29,5 @@ Route::get('apotek/{id}/list_medicine', 'ApotekController@getNamaObat');
 Route::post('apotek/{id}/add_nama_obat', 'ApotekController@addNamaObat');
 Route::post('apotek/{id}/add_jenis_obat', 'ApotekController@addJenisObat');
 Route::get('apotek/{id}/jenis_obat', 'ApotekController@getJenisObat');
+
+
