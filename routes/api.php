@@ -36,14 +36,14 @@ Route::get('apotek/{id}/list_nama_obat', 'Apotek\ApotekController@getNamaObat');
 Route::post('apotek/{id}/add_jenis_obat', 'Apotek\ApotekController@addJenisObat'); //menambahkan jenis obat
 Route::get('apotek/{id}/jenis_obat', 'Apotek\ApotekController@getJenisObat'); //menampilkan jenis obat
 
-Route::get('apotek/{id}/pesanan', 'Apotek\PesananController@getPesanan');
-Route::get('apotek/{id_apotek}/pesanan/{id_order}', 'Apotek\PesananController@detailPesanan');
-Route::get('apotek/{id_apotek}/pesanan/{id_order}/terima', 'Apotek\PesananController@terimaPesanan');
-Route::get('apotek/{id_apotek}/pesanan/{id_order}/tolak', 'Apotek\PesananController@tolakPesanan');
+Route::get('apotek/{id}/pesanan', 'Apotek\PesananController@getPesanan'); //get list pesanan
+Route::get('apotek/{id_apotek}/pesanan/{id_order}', 'Apotek\PesananController@detailPesanan'); //get detail pesanan
+Route::get('apotek/{id_apotek}/pesanan/{id_order}/terima', 'Apotek\PesananController@terimaPesanan'); //terima pesanan
+Route::get('apotek/{id_apotek}/pesanan/{id_order}/tolak', 'Apotek\PesananController@tolakPesanan'); //tolak pesanan
 
-Route::get('apotek/{id}/proses', 'Apotek\PesananController@getPesananProses');
-Route::get('apotek/{id_apotek}/proses/{id_order}/ojek', 'Apotek\PesananController@prosesPesananSelesai');
-Route::get('apotek/{id}/historyPesanan', 'Apotek\PesananController@historyPesanan');
+Route::get('apotek/{id}/proses', 'Apotek\PesananController@getPesananProses'); //get pesanan yg telah diproses
+Route::get('apotek/{id_apotek}/proses/{id_order}/ojek', 'Apotek\PesananController@prosesPesananSelesai'); //pesanan selesai diproses
+Route::get('apotek/{id}/historyPesanan', 'Apotek\PesananController@historyPesanan'); //history pesanan
 /*
 	APOTEK API END HERE
 **/
