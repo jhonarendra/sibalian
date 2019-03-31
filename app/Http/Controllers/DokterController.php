@@ -6,11 +6,14 @@ use Illuminate\Http\Request;
 use App\Dokter;
 use App\Konsultasi;
 use Validator;
+use JWTFactory;
+use JWTAuth;
+use JWTAuthException;
 use Illuminate\Support\Facades\Auth; 
 
 class DokterController extends Controller
 {
-    public $successStatus = 200;
+    //public $successStatus = 200;
     /**
      * Display a listing of the resource.
      *
@@ -23,9 +26,60 @@ class DokterController extends Controller
     }
 
     //register api
+    public function register(Request $request){
+        $validator=Validator::make($request->all(), [
+            'nama_dokter' => 'required', 'string', 'max:255',
+            'ttl_dokter' => 'required','date',
+            'alamat' => 'required', 'string', 'max:80',
+            'telp' => 'required','string', 'max:12',
+            'id_kategori' => 'required',
+            'email' => 'required', 'string', 'email', 'max:255', 'unique:users',
+            'password' => 'required', 'string', 'min:8', 'confirmed',
+        ]);
+        if ($validator->fails()){
+            return response()->json(['error'=>$validator->errors()], 401);
+        }
+        $input = $request->all();
+        $input['password'] = bcrypt($input['password']);
+        $dokter = Dokter::create($input);
+        $token = JWTAuth::fromUser($dokter);
+
+        return response()->json(compact('dokter','token'),201);
+    }
 
     //login api
+    public function login(Request $request){
+        $validator=Validator::make($request->all(),[
+            'email' => 'required|string|email|max:255',
+            'password'=> 'required|string'
+        ]);
 
+        if ($validator->fails()) {
+            return response()->json($validator->errors());
+        }
+        \Config::set('jwt.user', 'App\Dokter'); 
+        \Config::set('auth.providers.users.model', \App\Dokter::class);
+        $credentials = $request->only('email', 'password');
+        try {
+            $token = JWTAuth::attempt($credentials);
+            if (!$token) {
+               return response()->json(['error' => 'invalid_credentials'], 401);
+            }
+        } catch (JWTException $e) {
+             return response()->json(['error' => 'could_not_create_token'], 400);
+        }
+        /*$token = null;
+        try {
+            if (! $token = JWTAuth::attempt($credentials)) {
+                return response()->json(['error' => 'invalid_credentials'], 401);
+            }
+        } catch (JWTException $e) {
+            return response()->json(['error' => 'could_not_create_token'], 500);
+        }*/
+       return response()->json(compact('token'),200);
+    }
+
+    //logout api
 
     /**
      * Show the form for creating a new resource.

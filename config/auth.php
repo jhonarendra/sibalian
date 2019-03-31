@@ -42,9 +42,9 @@ return [
         ],
 
         'api' => [
-            'driver' => 'token',
+            'driver' => 'jwt',
             'provider' => 'users',
-            'hash' => false,
+            //'hash' => false,
         ],
         'admin' => [
             'driver' => 'session',
@@ -62,9 +62,9 @@ return [
         ],
 
         'api-dokter' => [
-            'driver' => 'token',
+            'driver' => 'jwt',
             'provider' => 'dokters',
-            'hash' => false,
+            //'hash' => false,
         ],
         'apotek' => [
             'driver' => 'session',
