@@ -56,3 +56,17 @@ Route::post('dokter/{id}/edit', 'DokterController@editProfil');
 
 Route::get('dokter/{id}/konsultasi', 'DokterController@getKonsultasi'); //get list pesanan
 Route::post('dokter/{id}/konsultasi/{id_dokter}/terima', 'DokterController@terimaKonsultasi');
+
+
+
+
+/*
+|
+| Kurir
+|
+*/
+
+Route::get('kurir/{id}','KurirController@getProfil');
+Route::post('kurir/{id}/update','KurirController@updateProfil');
+Route::post('kurir/login','KurirController@login');
+Route::post('kurir/register','KurirController@register');
