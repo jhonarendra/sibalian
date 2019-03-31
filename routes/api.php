@@ -50,5 +50,9 @@ Route::get('apotek/{id}/historyPesanan', 'Apotek\PesananController@historyPesana
 
 Route::post('dokter/register', 'DokterController@register');
 Route::post('dokter/login', 'DokterController@login');
+
+Route::post('dokter/logout','DokterController@logout');
+Route::post('dokter/{id}/edit', 'DokterController@editProfil');
+
 Route::get('dokter/{id}/konsultasi', 'DokterController@getKonsultasi'); //get list pesanan
 Route::post('dokter/{id}/konsultasi/{id_dokter}/terima', 'DokterController@terimaKonsultasi');

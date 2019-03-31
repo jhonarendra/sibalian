@@ -6,9 +6,10 @@ use Illuminate\Http\Request;
 use App\Dokter;
 use App\Konsultasi;
 use Validator;
-use JWTFactory;
 use JWTAuth;
-use JWTAuthException;
+use Config;
+use Tymon\JWTAuth\Exceptions\JWTException;
+
 use Illuminate\Support\Facades\Auth; 
 
 class DokterController extends Controller
@@ -23,6 +24,12 @@ class DokterController extends Controller
     {
         $dokter = Dokter::join('kategori_dokter','dokter.id_kat','=','kategori_dokter.id_kat')->get();
         return response()->json($dokter);
+    }
+
+    public function __construct()
+    {
+    //  set the guard api as default driver
+        auth()->setDefaultDriver('api-dokter');
     }
 
     //register api
@@ -48,38 +55,71 @@ class DokterController extends Controller
     }
 
     //login api
+
     public function login(Request $request){
         $validator=Validator::make($request->all(),[
             'email' => 'required|string|email|max:255',
-            'password'=> 'required|string'
+            'password'=> 'required'
         ]);
 
         if ($validator->fails()) {
             return response()->json($validator->errors());
         }
-        \Config::set('jwt.user', 'App\Dokter'); 
-        \Config::set('auth.providers.users.model', \App\Dokter::class);
+        Config::set('jwt.user', 'App\Dokter'); 
+        Config::set('auth.providers.users.model', \App\Dokter::class);
         $credentials = $request->only('email', 'password');
-        try {
-            $token = JWTAuth::attempt($credentials);
-            if (!$token) {
-               return response()->json(['error' => 'invalid_credentials'], 401);
-            }
-        } catch (JWTException $e) {
-             return response()->json(['error' => 'could_not_create_token'], 400);
-        }
-        /*$token = null;
         try {
             if (! $token = JWTAuth::attempt($credentials)) {
                 return response()->json(['error' => 'invalid_credentials'], 401);
             }
         } catch (JWTException $e) {
             return response()->json(['error' => 'could_not_create_token'], 500);
-        }*/
-       return response()->json(compact('token'),200);
+        }
+       
+       return response()->json(compact('token'));
     }
 
-    //logout api
+    public function logout(Request $request){
+        $token = $request->header("Authorization");
+        // Invalidate the token
+        try {
+            JWTAuth::invalidate(JWTAuth::getToken());
+            return response()->json([
+                "status" => "success", 
+                "message"=> "User successfully logged out."
+            ]);
+        } catch (JWTException $e) {
+            // something went wrong whilst attempting to encode the token
+            return response()->json([
+            "status" => "error", 
+            "message" => "Failed to logout, please try again."
+            ], 500);
+        }
+    }
+
+    public function editProfil(Request $request, $id){
+        $dokter = Dokter::find($id);
+        $validatedData = $request->validate([
+            'nama_dokter' => 'required|string|max:255',
+            'ttl_dokter' => 'required|date',
+            'alamat' => 'required|string|max:80',
+            'telp' => 'required|string|max:12',
+            'id_kategori' => 'required',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8',
+        ]);
+        $dokter->nama_dokter=$request->nama_dokter;
+        $dokter->ttl_dokter=$request->ttl_dokter;
+        $dokter->alamat= $request->alamat;
+        $dokter->telp=$request->telp;
+        $dokter->id_kategori=$request->id_kategori;
+        $dokter->email=$request->email;
+        $dokter->password=$request->password;
+        $dokter->save();
+        return response()->json([
+            'message'=>'Success']);
+    }
+
 
     /**
      * Show the form for creating a new resource.

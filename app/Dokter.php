@@ -63,5 +63,7 @@ class Dokter extends Authenticatable implements JWTSubject
         return [];
     }   
 
+    
+
 
 }

@@ -64,8 +64,8 @@ return [
         'api-dokter' => [
             'driver' => 'jwt',
             'provider' => 'dokters',
-            //'hash' => false,
         ],
+
         'apotek' => [
             'driver' => 'session',
             'provider' => 'apoteks',
