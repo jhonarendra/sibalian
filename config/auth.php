@@ -85,6 +85,16 @@ return [
             'driver' => 'token',
             'provider' => 'kurirs',
             'hash' => false,
+        ],        
+        'lab' => [
+            'driver' => 'session',
+            'provider' => 'labs',
+        ],
+
+        'api-labs' => [
+            'driver' => 'jwt',
+            'provider' => 'labs',
+            
         ],
     ],
 
@@ -125,6 +135,10 @@ return [
         'kurirs' => [
             'driver' => 'eloquent',
             'model' => App\Kurir::class,
+        ],
+        'labs' => [
+            'driver' => 'eloquent',
+            'model' => App\Lab::class,
         ],
 
         // 'users' => [

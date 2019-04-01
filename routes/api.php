@@ -56,3 +56,30 @@ Route::post('dokter/{id}/edit', 'DokterController@editProfil');
 
 Route::get('dokter/{id}/konsultasi', 'DokterController@getKonsultasi'); //get list pesanan
 Route::post('dokter/{id}/konsultasi/{id_dokter}/terima', 'DokterController@terimaKonsultasi');
+
+/** 
+	ROUTING LABORATORIUM
+*/
+
+
+Route::group(['prefix' => 'lab'], function () {
+
+	Route::post('/login','Lab\LabAuthController@login');
+	Route::post('/register','Lab\LabAuthController@register');
+	// Route::post('/logout','Lab\LabController@logout');
+
+	Route::get('/daftar-cek-lab','Lab\LabController@showListCekLab' );
+	Route::post('/input-cek-lab','Lab\LabController@inputCekLab');
+	Route::post('/edit-cek-lab/{id}','Lab\LabController@editCekLab');
+
+
+});
+
+
+
+
+
+
+/** 
+	ROUTING LABORATORIUM END HERE
+*/
