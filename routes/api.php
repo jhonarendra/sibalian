@@ -83,3 +83,16 @@ Route::group(['prefix' => 'lab'], function () {
 /** 
 	ROUTING LABORATORIUM END HERE
 */
+
+
+
+/*
+|
+| Kurir
+|
+*/
+
+Route::get('kurir/{id}','KurirController@getProfil');
+Route::post('kurir/{id}/update','KurirController@updateProfil');
+Route::post('kurir/login','KurirController@login');
+Route::post('kurir/register','KurirController@register');
