@@ -44,6 +44,11 @@ Route::get('apotek/{id_apotek}/pesanan/{id_order}/tolak', 'Apotek\PesananControl
 Route::get('apotek/{id}/proses', 'Apotek\PesananController@getPesananProses'); //get pesanan yg telah diproses
 Route::get('apotek/{id_apotek}/proses/{id_order}/ojek', 'Apotek\PesananController@prosesPesananSelesai'); //pesanan selesai diproses
 Route::get('apotek/{id}/historyPesanan', 'Apotek\PesananController@historyPesanan'); //history pesanan
+
+
+Route::post('apotek/register','Apotek\AuthController@register');
+Route::post('apotek/login','Apotek\AuthController@login');
+
 /*
 	APOTEK API END HERE
 **/

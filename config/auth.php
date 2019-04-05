@@ -72,7 +72,7 @@ return [
         ],
 
         'api-apotek' => [
-            'driver' => 'token',
+            'driver' => 'jwt',
             'provider' => 'apoteks',
             'hash' => false,
         ],

@@ -76,6 +76,8 @@ class LabController extends Controller
     }
 
     public function daftarBooking(){
+
+        
         
     }
 
